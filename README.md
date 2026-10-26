@@ -3,9 +3,9 @@
 > **AI-Powered Family Kitchen Management Platform**  
 > *No more "what to cook today?" — Let AI manage your kitchen, family, and table.*
 
-🚀 **Live Demo:** [https://frontend-pearl-gamma-23dp69u944.vercel.app](https://frontend-pearl-gamma-23dp69u944.vercel.app)
+🚀 **Live Demo:** [https://pantry-to-plate-dolen.vercel.app](https://pantry-to-plate-dolen.vercel.app)
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Vercel-black?style=for-the-badge&logo=vercel)](https://frontend-pearl-gamma-23dp69u944.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Vercel-black?style=for-the-badge&logo=vercel)](https://pantry-to-plate-dolen.vercel.app)
 [![Status](https://img.shields.io/badge/Status-In%20Development-yellow?style=for-the-badge&logo=github)](https://github.com/dolendx7/Pantry_To_Plate)
 [![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-blue?style=for-the-badge&logo=react)](https://github.com/dolendx7/Pantry_To_Plate)
 [![Backend](https://img.shields.io/badge/Backend-Django%205%20%2B%20DRF-green?style=for-the-badge&logo=django)](https://github.com/dolendx7/Pantry_To_Plate)
