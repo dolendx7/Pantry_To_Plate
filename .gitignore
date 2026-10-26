@@ -33,6 +33,7 @@ frontend/.vite/
 # IDEs
 .vscode/
 .idea/
+.vercel
 *.swp
 *.swo
 *~
