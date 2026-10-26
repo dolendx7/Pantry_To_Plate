@@ -139,7 +139,7 @@ class AIRecipeGenerateView(APIView):
                 }
                 
                 response = requests.post(
-                    f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}",
+                    f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={api_key}",
                     headers=headers,
                     json=payload,
                     timeout=25
@@ -157,9 +157,10 @@ class AIRecipeGenerateView(APIView):
                     parsed_recipes = json.loads(content)
                     return Response(parsed_recipes, status=200)
                 else:
-                    raise Exception(f"Gemini API returned status code {response.status_code}: {response.text}")
+                    raise Exception(f"Gemini API error {response.status_code}: {response.text[:300]}")
             except Exception as e:
-                print(f"Gemini API call failed: {str(e)}. Falling back to local mock suggestions.")
+                print(f"[AI Recipe ERROR] {str(e)} -- falling back to local recipe matcher")
+                # Fall through to local fallback below
 
         # 2. Get list of recipes (Local Fallback)
         recipes = get_all_recipes(user.kitchen_id)
@@ -299,12 +300,16 @@ class AIPantryChatView(APIView):
                 pantry_str = ", ".join(pantry_list)
                 
                 prompt = (
-                    f"You are a helpful AI Pantry Chef. The user is asking: '{message}'.\n"
-                    f"Here are the active ingredients in their virtual kitchen pantry: {pantry_str}.\n"
-                    f"Provide a helpful conversational reply to their query. If you recommend recipes, suggest up to 2 specific dishes. "
-                    f"Respond ONLY with a valid JSON object matching the following structure (do not include markdown code block syntax):\n"
+                    f"You are an AI Pantry Chef assistant embedded in a kitchen management app. Your ONLY role is to help with cooking, recipes, food, ingredients, meal planning, and pantry management.\n"
+                    f"The user said: '{message}'.\n"
+                    f"Their pantry currently contains: {pantry_str if pantry_str else 'no items listed'}.\n\n"
+                    f"STRICT RULES:\n"
+                    f"- ONLY answer questions related to cooking, food, recipes, ingredients, meal planning, kitchen tips, or pantry management.\n"
+                    f"- If the user asks ANYTHING unrelated (personal questions, politics, sports, general knowledge, math, coding, etc.), do NOT answer it. Instead, politely say you can only help with cooking and pantry topics, and suggest a cooking question they could ask.\n"
+                    f"- If recommending recipes, suggest up to 2 specific dishes using their pantry items.\n\n"
+                    f"Respond ONLY with a valid JSON object (no markdown code block) matching this structure:\n"
                     f"{{\n"
-                    f"  \"message\": \"Conversational response text (you can use markdown here)\",\n"
+                    f"  \"message\": \"Your response text (markdown allowed)\",\n"
                     f"  \"recipes\": [\n"
                     f"    {{\n"
                     f"      \"recipe_id\": \"unique_id\",\n"
@@ -334,7 +339,7 @@ class AIPantryChatView(APIView):
                 }
                 
                 response = requests.post(
-                    f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}",
+                    f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={api_key}",
                     headers=headers,
                     json=payload,
                     timeout=25
@@ -352,9 +357,10 @@ class AIPantryChatView(APIView):
                     parsed_chat = json.loads(content)
                     return Response(parsed_chat, status=200)
                 else:
-                    raise Exception(f"Gemini API returned status code {response.status_code}: {response.text}")
+                    raise Exception(f"Gemini API error {response.status_code}: {response.text[:300]}")
             except Exception as e:
-                print(f"Gemini Chat API call failed: {str(e)}. Falling back to local mock chatbot.")
+                print(f"[AI Chat ERROR] {str(e)} — falling back to local response")
+                # Fall through to local fallback below
 
         # 1. Simple regex scanner to identify ingredient terms from natural queries (Local Fallback)
         known_keywords = ["tomato", "cucumber", "bread", "cheese", "eggs", "paneer", "chicken", "onion", "garlic", "rice", "spinach", "potato", "milk", "butter"]
@@ -417,6 +423,69 @@ class AIPantryChatView(APIView):
         suggestions = sorted(suggestions, key=lambda x: x['match_score'], reverse=True)[:3]
 
         # 3. Formulate natural response
+        msg_lower = message.lower().strip()
+
+        # --- Off-topic detection: deflect non-cooking questions ---
+        off_topic_keywords = [
+            # personal / social
+            'how are you', 'how r u', 'what are you', 'tell me about yourself', 'your name', 'who made you',
+            'are you human', 'are you a robot', 'do you have feelings', 'do you love', 'are you alive',
+            # general knowledge / trivia
+            'capital of', 'who is', 'what is the population', 'history of', 'when was', 'who invented',
+            'explain quantum', 'write a poem', 'tell me a joke', 'sing a song', 'write code',
+            # sports / entertainment
+            'cricket', 'football', 'soccer', 'ipl', 'nba', 'movie', 'actor', 'actress', 'bollywood', 'hollywood',
+            'song', 'music', 'celebrity', 'game', 'score',
+            # politics / news
+            'politics', 'election', 'president', 'prime minister', 'government', 'war', 'news', 'stock market',
+            # tech / math
+            'write a program', 'debug', 'calculate', 'solve', '2+2', 'what is pi',
+        ]
+        is_off_topic = any(kw in msg_lower for kw in off_topic_keywords)
+
+        # Greetings and general capability queries
+        greeting_triggers = ['hi', 'hello', 'hey', 'namaste', 'hola', 'good morning', 'good evening', 'good afternoon', "what's up", 'howdy']
+        general_triggers = ['help', 'what can you do', 'who are you', 'what do you do']
+        is_greeting = any(msg_lower == g or msg_lower.startswith(g + ' ') or msg_lower.startswith(g + '!') for g in greeting_triggers)
+        is_general = any(t in msg_lower for t in general_triggers)
+
+        if is_off_topic:
+            return Response({
+                'message': (
+                    "I'm strictly a **Pantry Chef AI** -- I can only help with cooking, recipes, ingredients, and meal planning.\n\n"
+                    "I'm not able to answer questions outside the kitchen! Try asking me:\n"
+                    "- 'What can I cook with my pantry items?'\n"
+                    "- 'Suggest a quick 20-minute dinner'\n"
+                    "- 'What can I substitute for butter?'"
+                ),
+                'recipes': []
+            }, status=200)
+
+
+        if is_greeting:
+            pantry_count = len(extracted_ingredients)
+            pantry_preview = ', '.join(extracted_ingredients[:4]) if extracted_ingredients else 'nothing yet'
+            response_text = (
+                f"Namaste! I'm your AI Pantry Chef, here to help you cook delicious meals from what you have!\n\n"
+                f"You currently have **{pantry_count} ingredient{'s' if pantry_count != 1 else ''}** in your pantry"
+                + (f" -- including {pantry_preview}" if extracted_ingredients else "") + ".\n\n"
+                f"Here's what I can help you with:\n"
+                f"- **Recipe suggestions** from your pantry ingredients\n"
+                f"- **Quick meal ideas** (e.g. 'suggest a 20-minute dinner')\n"
+                f"- **Ingredient substitutions** (e.g. 'what can I use instead of butter?')\n"
+                f"- **Meal planning tips** and cooking advice\n\n"
+                f"What would you like to cook today?"
+            )
+            return Response({'message': response_text, 'recipes': []}, status=200)
+
+        if is_general:
+            response_text = (
+                "I'm your **AI Pantry Chef** -- I can suggest recipes based on your pantry ingredients, "
+                "recommend quick meals, help with ingredient substitutions, and answer cooking questions.\n\n"
+                "Try asking: 'What can I cook with my pantry?' or 'Suggest a quick dinner!'"
+            )
+            return Response({'message': response_text, 'recipes': []}, status=200)
+
         if suggestions:
             response_text = f"Here are the recipes matching your ingredients (**{', '.join([i.capitalize() for i in extracted_ingredients[:5]])}**):\n\n"
             for sug in suggestions:

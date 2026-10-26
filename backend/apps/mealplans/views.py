@@ -488,7 +488,7 @@ class GeneratePlanView(APIView):
                     }
                     
                     response_api = requests.post(
-                        f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}",
+                        f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={api_key}",
                         headers=headers,
                         json=payload,
                         timeout=25

@@ -147,12 +147,19 @@ export default function AIRecipePage() {
       const botMsg = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: data.message,
+        text: data.message || data.error || 'Sorry, I could not process that.',
         recipes: data.recipes || []
       };
       setMessages(prev => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
+      const errText = err?.response?.data?.error || err?.message || 'AI Chef is temporarily unavailable. Please try again shortly.';
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        sender: 'bot',
+        text: `⚠️ ${errText}`,
+        recipes: []
+      }]);
     } finally {
       setChatLoading(false);
     }
@@ -474,7 +481,15 @@ export default function AIRecipePage() {
                       {/* Text Bubble */}
                       <div className="space-y-3">
                         <div className={`p-4.5 rounded-2xl text-xs leading-relaxed shadow-sm ${msg.sender === 'user' ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-tr-none' : 'bg-slate-50 border border-slate-250/20 text-slate-800 rounded-tl-none font-medium'}`}>
-                          {msg.text}
+                          {msg.sender === 'bot' ? (
+                            <span style={{whiteSpace: 'pre-wrap'}}>
+                              {msg.text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+                                part.startsWith('**') && part.endsWith('**')
+                                  ? <strong key={i}>{part.slice(2, -2)}</strong>
+                                  : <span key={i}>{part}</span>
+                              )}
+                            </span>
+                          ) : msg.text}
                         </div>
 
                         {/* Inline recipe matches if bot suggested any */}

@@ -24,32 +24,32 @@ def seed():
 
     print("Creating Admin User...")
     salt = bcrypt.gensalt(rounds=12)
-    admin_hash = bcrypt.hashpw("admin123".encode('utf-8'), salt).decode('utf-8')
+    admin_hash = bcrypt.hashpw("@#$Mokshil123".encode('utf-8'), salt).decode('utf-8')
     
     admin_user = User(
-        full_name="Kitchen Admin",
-        email="admin@test.com",
+        full_name="Mokshil",
+        email="mokshil@gmail.com",
         password_hash=admin_hash,
         role="admin"
     ).save()
 
     print("Creating Kitchen...")
     kitchen = Kitchen(
-        kitchen_name="The Sharma Kitchen",
+        kitchen_name="jain kitchen",
         kitchen_type="nuclear",
         admin_id=admin_user,
-        default_diet_type="veg",
-        invite_code="SHAR7821"
+        default_diet_type="jain",
+        invite_code="abcd1234"
     ).save()
 
     admin_user.kitchen_id = kitchen
     admin_user.save()
     
     print("Creating Member User...")
-    member_hash = bcrypt.hashpw("member123".encode('utf-8'), salt).decode('utf-8')
+    member_hash = bcrypt.hashpw("@#$Dolen123".encode('utf-8'), salt).decode('utf-8')
     member_user = User(
-        full_name="Family Member",
-        email="member@test.com",
+        full_name="Dolen",
+        email="dolen@gmail.com",
         password_hash=member_hash,
         role="member",
         kitchen_id=kitchen
@@ -316,14 +316,15 @@ def seed():
     print("Database seeding completed successfully!")
     print("-------------------------------------------------")
     print("Admin Credentials:")
-    print("Email: admin@test.com")
-    print("Password: admin123")
+    print("Email: mokshil@gmail.com")
+    print("Password: @#$Mokshil123")
     print("-------------------------------------------------")
     print("Member Credentials:")
-    print("Email: member@test.com")
-    print("Password: member123")
+    print("Email: dolen@gmail.com")
+    print("Password: @#$Dolen123")
     print("-------------------------------------------------")
-    print("Kitchen Invite Code: SHAR7821")
+    print("Kitchen Name: jain kitchen")
+    print("Kitchen Invite Code: abcd1234")
     print("-------------------------------------------------")
 
 if __name__ == "__main__":
