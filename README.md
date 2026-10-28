@@ -1,116 +1,116 @@
 # 🍽️ Pantry to Plate
 
-> **AI-Powered Family Kitchen Management Platform**  
-> *No more "what to cook today?" — Let AI manage your kitchen, family, and table.*
+> AI-Powered Family Kitchen Management Platform  
+> Smart pantry tracking, collaborative meal planning, AI recipe generation, and family kitchen coordination.
 
-🚀 **Live Demo:** [https://pantry-to-plate-dolen.vercel.app](https://pantry-to-plate-dolen.vercel.app)
-
-[![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Vercel-black?style=for-the-badge&logo=vercel)](https://pantry-to-plate-dolen.vercel.app)
-[![Status](https://img.shields.io/badge/Status-In%20Development-yellow?style=for-the-badge&logo=github)](https://github.com/dolendx7/Pantry_To_Plate)
-[![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-blue?style=for-the-badge&logo=react)](https://github.com/dolendx7/Pantry_To_Plate)
-[![Backend](https://img.shields.io/badge/Backend-Django%205%20%2B%20DRF-green?style=for-the-badge&logo=django)](https://github.com/dolendx7/Pantry_To_Plate)
-[![Database](https://img.shields.io/badge/Database-MongoDB%20%2B%20MongoEngine-brightgreen?style=for-the-badge&logo=mongodb)](https://github.com/dolendx7/Pantry_To_Plate)
-[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](https://github.com/dolendx7/Pantry_To_Plate)
-
----
+<p align="center">
+  <a href="https://pantry-to-plate-dolen.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Demo-Live%20on%20Vercel-black?style=for-the-badge&logo=vercel" alt="Live Demo" />
+  </a>
+  <img src="https://img.shields.io/badge/Status-In%20Development-yellow?style=for-the-badge&logo=github" alt="Status" />
+  <img src="https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-blue?style=for-the-badge&logo=react" alt="Frontend" />
+  <img src="https://img.shields.io/badge/Backend-Django%205%20%2B%20DRF-green?style=for-the-badge&logo=django" alt="Backend" />
+  <img src="https://img.shields.io/badge/Database-MongoDB%20%2B%20MongoEngine-brightgreen?style=for-the-badge&logo=mongodb" alt="Database" />
+  <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="MIT License" />
+</p>
 
 ## 🌟 Overview
 
-**Pantry to Plate** is an advanced, family-collaborative kitchen management platform designed to eliminate mealtime decision fatigue and minimize household food waste. Using a **Hub & Spoke model**, a household **Admin** creates a shared kitchen workspace, inviting **Members** (family/roommates) to participate. 
+Pantry to Plate is a smart family kitchen management platform designed to reduce meal-planning stress, track pantry inventory in real time, and minimize food waste. It helps families collaborate on what they have, what they need, and what they should cook next.
 
-The application integrates real-time inventory tracking, collaborative tools, and a state-of-the-art **AI Recipe Engine** powered by Google's Gemini API to suggest personalized recipes based on ingredients currently in the pantry.
+The platform combines:
 
----
+- inventory tracking for groceries and household staples
+- AI-powered recipe suggestions using available ingredients
+- family collaboration for shared shopping lists and alerts
+- meal planning and communication tools for everyday cooking
 
-## 🧪 Tech Stack
-
-### Frontend
-*   **Core:** React 19 (Single Page Application)
-*   **Build System:** Vite
-*   **Styling:** Tailwind CSS v4 & custom CSS variables
-*   **State Management:** Zustand
-*   **Routing:** React Router v7
-*   **Animations:** Framer Motion
-*   **Icons:** Lucide React
-*   **API Client:** Axios
-
-### Backend
-*   **Framework:** Django 5.0 & Django REST Framework (DRF)
-*   **Authentication:** JWT (JSON Web Tokens via DRF SimpleJWT)
-*   **Database:** MongoDB + MongoEngine (Object-Document Mapper)
-*   **Task Queue:** Celery (Asynchronous background tasks)
-*   **Caching & Broker:** Redis
-*   **WSGI Server:** Gunicorn
-
-### AI Integration
-*   **Engine:** Google Gemini API (`gemini-3.1-flash-lite`)
-*   **Fallback:** Dynamic local matching and heuristic recipe generator with sub-score ranking
+With a modern dashboard and a lightweight, scalable architecture, Pantry to Plate turns kitchen management into a more organized and enjoyable experience.
 
 ---
 
-## ✨ Features Breakdown
+## ✨ Key Features
 
-### 📦 Smart Pantry Tracking (CRUD)
-*   Categorized view of items (Produce, Dairy, Grains, Spices, Bakery, etc.).
-*   Automatic expiry countdowns and color-coded status badges.
-*   "Running Low" stock thresholds with auto-flagging.
-*   Location tracking (Fridge, Shelf, Freezer, Pantry).
-*   Add custom items with auto-matching from a master database.
+### 🛒 Smart Pantry Tracking
+- Add, edit, and remove pantry items
+- Organize items by category and storage location
+- Monitor stock levels and expiry dates
+- Highlight low-stock and soon-to-expire items
+- Manage pantry items from a family-wide shared workspace
 
-### 🤖 AI Recipe Generation
-*   **Gemini Integration:** Recommends recipes using available pantry ingredients.
-*   **Custom Filters:** Filter by cuisine (Indian, Italian, Mexican, etc.), diet (Veg, Vegan, Non-Veg), preparation time, and max calories.
-*   **Smart Substitutions:** Recommends replacements for missing items (e.g., Tofu for Paneer, Greek Yogurt for Mayonnaise).
-*   **Nutritional Estimates:** Calculates calories, protein, fats, and carbs dynamically.
+### 🤖 AI Recipe Engine
+- Generate recipe suggestions from current pantry inventory
+- Apply cuisine, diet, and time-based filters
+- Recommend substitutions when ingredients are missing
+- Estimate calories and nutritional values
+- Prioritize recipes based on ingredient matching and household preferences
 
 ### 👨‍👩‍👧‍👦 Family Collaboration
-*   Admin generates a unique invite code to build a shared kitchen workspace.
-*   Role-based permissions (Admin, Member, Guest).
-*   **Shared To-Buy List:** Autocomplete shopping items based on low stock or custom inputs, with options to assign tasks to specific family members.
-*   **Alert Center:** Shared real-time notifications for expiring dairy, low stock, or grocery list changes.
+- Shared kitchen spaces for households or families
+- Role-based access and ownership controls
+- Shared to-buy list with task assignment
+- Real-time communication and kitchen notifications
 
-### 💬 Family Communication
-*   Integrated, real-time Group Chat system.
-*   Daily meal plan broadcasts.
-*   Food Polls ("What should we make for dinner?") with reaction emojis.
+### 💬 Communication & Planning
+- Family group chat and kitchen announcements
+- Meal planning support for daily cooking decisions
+- Polls and shared decision-making features
+- Alerts for expiring food and low-stock items
 
-### 🎨 Visual & UI Design (Premium Glassmorphism)
-*   Curated colors featuring Rose Gold primary keys, Periwinkle accents, and Sage support colors.
-*   Frosted glass panels (`backdrop-filter: blur`), subtle micro-animations, and bento-grid dashboards.
-*   Fully responsive and optimized layout.
+### 🎨 Premium User Experience
+- Responsive glassmorphism-inspired UI
+- Lightweight SPA experience with smooth navigation
+- Modern design optimized for desktop and mobile use
 
 ---
 
-## 📁 Folder Structure
+## 🧰 Tech Stack
+
+| Layer | Technologies |
+| --- | --- |
+| Frontend | React 19, Vite, Tailwind CSS, Zustand, React Router, Framer Motion, Lucide React |
+| Backend | Django 5, Django REST Framework, JWT Auth, Celery |
+| Database | MongoDB, MongoEngine |
+| Cache / Queue | Redis |
+| AI | Google Gemini API |
+| Deployment | Vercel (Frontend), Django Server / Hosting Setup (Backend) |
+
+---
+
+## 🏗️ Project Structure
 
 ```text
 Pantry_To_Plate/
-├── backend/                        # Django API Backend
-│   ├── apps/                       # Modular Django Applications
-│   │   ├── auth_app/               # JWT Auth & Subscriptions
-│   │   ├── kitchen/                # Kitchen/Workspace settings
-│   │   ├── pantry/                 # Pantry inventory tracking
-│   │   ├── recipes/                # Recipe database & AI view
-│   │   ├── buylist/                # Shopping lists
-│   │   ├── mealplans/              # Calendar-based meal scheduling
-│   │   ├── chat/                   # Internal family chat
-│   │   ├── alerts/                 # Expiring alerts & low stock
-│   │   ├── dietary/                # Health preferences & allergies
-│   │   └── analytics/              # Consumption graphs & charts
-│   ├── pantrytoplate/              # Core Django config
+├── backend/                        # Django REST API
+│   ├── apps/                       # Modular app structure
+│   │   ├── auth_app/               # Authentication and user setup
+│   │   ├── kitchen/                # Workspace settings
+│   │   ├── pantry/                 # Inventory management
+│   │   ├── recipes/                # Recipe engine and recommendations
+│   │   ├── buylist/                # Shopping list logic
+│   │   ├── mealplans/              # Meal planning features
+│   │   ├── chat/                   # Family chat system
+│   │   ├── alerts/                 # Notifications and reminders
+│   │   ├── dietary/                # Dietary preferences and allergies
+│   │   └── analytics/              # Consumption and insights
+│   ├── pantrytoplate/              # Django project config
 │   ├── requirements.txt            # Python dependencies
-│   ├── manage.py                   # Django CLI utility
-│   └── seed_data.py                # Database seeding script
+│   ├── manage.py                   # Django CLI
+│   └── seed_data.py                # Seed master pantry data
 │
-├── frontend/                       # Vite + React Client
+├── frontend/                       # React + Vite client
 │   ├── src/
-│   │   ├── components/             # Common & Layout components
-│   │   ├── pages/                  # Page components (Pantry, Chat, etc.)
-│   │   ├── store/                  # Zustand state containers
-│   │   ├── services/               # REST API Client files
-│   │   └── Router.jsx              # React Router v7 routes configuration
-│   ├── package.json                # NPM dependencies
-│   └── vite.config.js              # Vite configuration
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── store/
+│   │   ├── services/
+│   │   └── Router.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── README.md
+├── LICENSE
+└── .gitignore
 ```
 
 ---
@@ -118,128 +118,103 @@ Pantry_To_Plate/
 ## 🚀 Local Development Setup
 
 ### Prerequisites
-Make sure you have the following installed:
-*   **Python 3.11+**
-*   **Node.js 18+**
-*   **MongoDB** (running locally on `mongodb://localhost:27017` or Atlas)
-*   **Redis** (optional, running on `localhost:6379`)
+
+Before starting, make sure you have:
+
+- Python 3.11+
+- Node.js 18+
+- MongoDB running locally or through MongoDB Atlas
+- Redis (recommended for Celery/background tasks)
+
+### 1) Backend Setup
+
+```bash
+cd backend
+
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# macOS / Linux
+source .venv/bin/activate
+
+pip install -r requirements.txt
+cp .env.example .env
+python manage.py migrate
+python seed_data.py
+python manage.py runserver
+```
+
+The backend API will typically run at:
+
+- `http://127.0.0.1:8000`
+
+### 2) Frontend Setup
+
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+The frontend app will usually run at:
+
+- `http://localhost:5173`
+
+> If your project uses a different environment variable naming convention, update the frontend config accordingly.
 
 ---
 
-### 1. Backend Setup
+## 🔌 API Overview
 
-1.  Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
-
-2.  Create and activate a virtual environment:
-    ```bash
-    # Windows:
-    python -m venv venv
-    venv\Scripts\activate
-
-    # Linux/Mac:
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
-
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  Configure environment variables:
-    ```bash
-    copy .env.example .env     # Windows
-    # cp .env.example .env     # Linux/Mac
-    ```
-    *Open `.env` and set your credentials, database name, and `GEMINI_API_KEY` (or `OPENAI_API_KEY`).*
-
-5.  Seed the database with default master items (optional but recommended):
-    ```bash
-    python seed_data.py
-    ```
-
-6.  Start the development server:
-    ```bash
-    python manage.py runserver
-    ```
-    *The backend API will run on `http://127.0.0.1:8000`.*
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| POST | `/api/v1/auth/register` | Create a new account |
+| POST | `/api/v1/auth/login` | Authenticate and receive JWT |
+| GET | `/api/v1/pantry` | Fetch pantry inventory |
+| POST | `/api/v1/pantry` | Add new pantry items |
+| POST | `/api/v1/recipes/ai-generate` | Generate AI recipe suggestions |
+| GET | `/api/v1/buylist` | Retrieve shopping list |
+| GET | `/api/v1/chat/messages` | View kitchen chat messages |
+| GET | `/api/v1/alerts` | Get active kitchen alerts |
 
 ---
 
-### 2. Frontend Setup
+## 🗺️ Roadmap
 
-1.  Open a new terminal window and navigate to the frontend directory:
-    ```bash
-    cd frontend
-    ```
-
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-
-3.  Configure frontend environment variables:
-    ```bash
-    # Create .env.local file
-    echo VITE_API_URL=http://localhost:8000/api/v1 > .env.local
-    ```
-
-4.  Start the Vite developer server:
-    ```bash
-    npm run dev
-    ```
-    *The frontend application will be hosted on `http://localhost:5173`.*
-
----
-
-## 🔌 API Endpoints Reference
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| **POST** | `/api/v1/auth/register` | Create a new Admin account |
-| **POST** | `/api/v1/auth/login` | Authenticate user and receive JWT |
-| **GET** | `/api/v1/pantry` | List items in the kitchen's pantry |
-| **POST** | `/api/v1/pantry` | Add a new pantry item |
-| **POST** | `/api/v1/recipes/ai-generate` | Generate recipes via Google Gemini |
-| **GET** | `/api/v1/buylist` | Get active shopping list |
-| **GET** | `/api/v1/chat/messages` | Retrieve real-time kitchen chat messages |
-| **GET** | `/api/v1/alerts` | List unread food/pantry notifications |
-
----
-
-## 🗺️ Project Roadmap
-
-- [x] **Phase 1 (Complete):** Architecture configuration, MongoDB connection, Glassmorphism UI components.
-- [x] **Phase 2 (Complete):** Session auth, Pantry CRUD, basic Shopping List functionality.
-- [ ] **Phase 3 (Active):** Fine-tuning Gemini prompt instructions and ingredient-matching precision.
-- [ ] **Phase 4 (Upcoming):** WebSockets implementation for instant Chat & shared UI sync.
-- [ ] **Phase 5 (Planned):** Barcode receipt scanner and native mobile packaging (PWA).
+- [x] Initial architecture and project scaffolding
+- [x] Authentication and pantry CRUD flows
+- [x] Core shopping list and kitchen logic
+- [ ] AI recipe precision improvements
+- [ ] Real-time chat and live updates
+- [ ] Advanced alerts and household analytics
+- [ ] Barcode and receipt scanning support
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
-1.  Fork the Repository.
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the Branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Open a pull request
 
 ---
 
 ## 📄 License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👨‍💻 Maintainers
+## 👨‍💻 Maintainer
 
-*   **GitHub Username:** [@dolendx7](https://github.com/dolendx7)
-*   **Repository:** [Pantry_To_Plate](https://github.com/dolendx7/Pantry_To_Plate)
+- GitHub: [@dolendx7](https://github.com/dolendx7)
+- Repository: [Pantry_To_Plate](https://github.com/dolendx7/Pantry_To_Plate)
 
-***Made with ❤️ to simplify family kitchens and reduce food waste.***
+Made with ❤️ for smarter family kitchens and less food waste.
